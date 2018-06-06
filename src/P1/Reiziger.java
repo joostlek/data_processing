@@ -1,3 +1,5 @@
+package P1;
+
 import java.sql.Date;
 
 public class Reiziger {
