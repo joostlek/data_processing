@@ -16,4 +16,6 @@ public interface OVChipKaartDao {
     public void closeConnection() throws SQLException;
 
     public List<OVChipKaart> findByReiziger(int reizigerId) throws SQLException;
+
+    public List<Integer> findByProduct(int productNummer) throws SQLException;
 }

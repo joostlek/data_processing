@@ -74,6 +74,21 @@ public class OVChipKaartOracleDaoImpl extends OracleBaseDao implements OVChipKaa
         return ovChipKaarts;
     }
 
+    @Override
+    public List<Integer> findByProduct(int productNummer) throws SQLException {
+        Connection connection = getConnection();
+        PreparedStatement statement = connection.prepareStatement("SELECT OV.OV_CHIPKAART_PRODUCT.KAARTNUMMER FROM OV.OV_CHIPKAART_PRODUCT WHERE PRODUCTNUMMER = ?");
+        statement.setInt(1, productNummer);
+        List<Integer> integers = new ArrayList<>();
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            integers.add(resultSet.getInt("KAARTNUMMER"));
+        }
+        statement.close();
+        closeConnection();
+        return integers;
+    }
+
     private  OVChipKaart toOVChipKaart(ResultSet resultSet) throws SQLException {
         return new OVChipKaart(
                 resultSet.getInt("KAARTNUMMER"),
